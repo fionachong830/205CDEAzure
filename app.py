@@ -88,7 +88,6 @@ def checkLoginStatus(id):
 def getProduct():
     cursor.execute('SELECT * FROM product WHERE deletedInd="N"')
     product = cursor.fetchall()
-    print(product)
     return product 
         
 def updateStatus():
