@@ -9,14 +9,21 @@ from fileinput import filename
 import mysql.connector
 from mysql.connector import errorcode
 from azure.storage.fileshare import ShareServiceClient, ShareFileClient
+from azure.storage.blob import BlobServiceClient
 
 app = Flask(__name__)
 cart=[]
-connection_string = "DefaultEndpointsProtocol=https;AccountName=wpstorage77be0ae4f2;AccountKey=1aPUATJlKBRUg5gEAh0/DuGLtIeflB3lWZ/wlIkHqk6b5ZvAAbyxGHkY+ZXOBL6wFqiV5ZTJctHP+AStCayHqA==;BlobEndpoint=https://wpstorage77be0ae4f2.blob.core.windows.net/;FileEndpoint=https://wpstorage77be0ae4f2.file.core.windows.net/;TableEndpoint=https://wpstorage77be0ae4f2.table.core.windows.net/;QueueEndpoint=https://wpstorage77be0ae4f2.queue.core.windows.net/"
 
-service = ShareServiceClient.from_connection_string(conn_str=connection_string)
+connect_str = 'DefaultEndpointsProtocol=https;AccountName=wpstorage77be0ae4f2;AccountKey=1aPUATJlKBRUg5gEAh0/DuGLtIeflB3lWZ/wlIkHqk6b5ZvAAbyxGHkY+ZXOBL6wFqiV5ZTJctHP+AStCayHqA==;EndpointSuffix=core.windows.net'
+# retrieve the connection string from the environment variable
+container_name = "product" # container name in which images will be store in the storage account
 
-file_client = ShareFileClient.from_connection_string(conn_str=connection_string, share_name="static205cde", file_path="Logo.png")
+blob_service_client = BlobServiceClient.from_connection_string(conn_str=connect_str) # create a blob service client to interact with the storage account
+try:
+    container_client = blob_service_client.get_container_client(container=container_name) # get container client to interact with the container in which images will be stored
+    container_client.get_container_properties() # get properties of the container to force exception to be thrown if container does not exist
+except Exception as e:
+    container_client = blob_service_client.create_container(container_name) # create a container in the storage account if it does not exist
 
 
 app.config['SECRET_KEY'] = 'top-secret!'
