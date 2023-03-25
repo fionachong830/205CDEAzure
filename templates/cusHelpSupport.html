@@ -1,0 +1,37 @@
+﻿{% extends "/bootstrap/baseCustomer.html" %}
+{% block title %}Help and Support{% endblock %}
+{% block content %}
+<h2 class="text-primary">Help and Support</h2><br>
+<div class="fill-in">
+    {% for info in user %}
+    <form action="/customer/{{info.userID}}/helpSupport" method="post">
+    {% endfor %}
+        <label for="session" id="session">Catageries</label>
+        <select name="session" id="session">
+            <option value="User information">User information</option>
+            <option value="About purchase">About purchase</option>
+            <option value="Payment">Payment</option>
+            <option value="Refund">Refund</option>
+            {% for product in product %}
+                <option value="{{product.productName}}">{{product.productName}}</option>
+            {% endfor %} 
+           <option value="Others">Others</option>
+        </select> <br>
+        <label for="subHID" id="subHID">Subscription History ID
+        </label>
+        <select name="subHID" id="subHID">
+            <option value="None">---</option>
+            {% for items in data %}
+                <option value="{{items.subHID}}">{{items.subHID}}</option>
+            {% endfor %} 
+        </select> <br>
+        <label for="question">Questions</label>
+        <input type="text" name="question" required> <br>
+        <input type="submit" class="btn bg-gradient-primary mt-4"  value="Submit">
+    </form>
+</div>
+{% if status == 'success' %}
+Submit successfully. Will get back to you soon. Thank you.
+{% endif %}
+{% endblock %}
+

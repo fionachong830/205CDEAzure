@@ -1,0 +1,44 @@
+﻿{% extends "/bootstrap/baseStaff.html" %}
+{% block title %}Add Account{% endblock %}
+{% block content %}
+<h2 class="text-primary">Create New Account</h2><br>
+<div class="fill-in">
+    {% for info in user%}
+    <form action="/staff/{{info.userID}}/addAccount" method="post">
+    {% endfor %}
+        <label for="accType" id="accType">Choose a account type</label>
+        <select id="accType" name="accType">
+            <option value="C">Customer</option>
+            <option value="S">Staff</option>
+        </select> <br>
+        <label for="name">Name</label>
+        <input type="text" name="name" required /> <br>
+        <label for="phoneNo">Phone Number</label>
+        <input type="tel" name="phoneNo" required /> <br>
+        <label for="email">Email</label>
+        <input type="email" name="email" required /> <br>
+        <label for="userName">User Name</label>
+        <input type="text" name="userName" required /> <br>
+        <label for="password">Password</label>
+        <input type="password" name="password" required /> <br>
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" name="confirmPassword" required /> <br>
+        <input type="submit" class="btn bg-gradient-primary mt-4"  value="Submit" />
+    </form>
+    {% if status == 'usernamedup' %}
+    Your username duplicated. Please sign in or use another username. Thank you.
+    {% endif %}
+    {% if status == 'phoneNodup' %}
+    Your phone number duplicated. Please sign in or use another phone number. Thank you.
+    {% endif %}
+    {% if status == 'emaildup' %}
+    Your email duplicated. Please sign in or use another email. Thank you.
+    {% endif %}
+    {% if status == 'invalidConfirmPassword' %}
+    Your confirm password is not same with your password. Please try again. Thank you.
+    {% endif %}
+    {% if status == 'success' %}
+    Create successfully Thank you.
+    {% endif %}
+</div>
+{% endblock %}

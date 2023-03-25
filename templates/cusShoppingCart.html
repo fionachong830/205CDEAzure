@@ -1,0 +1,79 @@
+﻿{% extends "/bootstrap/baseCustomer.html" %}
+{% block title %}Shopping Cart{% endblock %}
+{% block content %}
+<h2 class="text-primary">Shopping Cart</h2><br>
+<p id="message"></p>
+{% if status != 'Empty' %}
+<div class="card">
+  <div class="table-responsive">
+    <table class="table align-items-center mb-0">
+      <thead>
+        <tr>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Days</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price per day</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subtotal</th>
+          <th class="text-secondary opacity-7"></th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for items in list %}
+          <tr>
+              <td class="align-middle text-center text-sm">
+                  <p class="text-xs font-weight-bold mb-0">{{items.name}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                  <p class="text-xs font-weight-bold mb-0">{{items.count}} </p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                  <p class="text-xs font-weight-bold mb-0">$ {{items.price}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">$ {{items.subtotal()}}</p>
+            </td>
+              <td class="align-middle">
+                  <div class="buttons">
+                    <label class="btn bg-gradient-primary mt-4" for="{{items.name}}">Edit</label>
+                  </div>
+               </td>
+            </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+<br>
+<p id="total" class="text-primary">Total: ${{total}}</p>
+{% for info in user %}
+<form action="/customer/{{info.userID}}/buy" method="post">
+{% endfor %}
+<input type="submit" class="btn bg-gradient-primary mt-4" value="Confirm" />
+</form>
+<button class="btn bg-gradient-primary mt-4" onclick="window.print()">Print this page</button>
+{% endif %} 
+
+{% if status == 'Empty' %}
+Nothing in Cart
+{% endif %} 
+{% for items in list %}
+    <input class="modal-state_cus" id="{{items.name}}" type="checkbox" />
+    <div class="modal_cus">
+        <label class="modal__bg_cus" for="{{items.name}}"></label>
+        <div class="modal__inner_cus">
+            <label class="modal__close_cus" for="{{items.name}}"></label>
+            <h2>{{items.name}}</h2>
+            <div class="fill-in">
+              {% for info in user %}
+              <form action="/customer/{{info.userID}}/shoppingCart" method="post">
+              {% endfor %}
+                    <input type="hidden" name="prodID" value={{items.id}}>
+                    <label for="day">Days</label>
+                    <input type="number" name="days" min="1" value={{items.count}} required /><br>
+                    <input type="submit"class="btn bg-gradient-primary mt-4" value="Save" />
+                </form>
+            </div>
+        </div>
+    </div>    
+{% endfor %}  
+{% endblock %}
+
+{% block script %}
+{% endblock %} 

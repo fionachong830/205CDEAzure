@@ -1,0 +1,60 @@
+﻿{% extends "/bootstrap/baseCustomer.html" %}
+{% block title %}Upload Document{% endblock %}
+{% block content %}
+<h2 class="text-primary">Upload Document</h2><br>
+<h4>Pending for Payment Orders:</h4>
+<div class="card">
+  <div class="table-responsive">
+    <table class="table align-items-center mb-0">
+      <thead>
+        <tr>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Payment ID</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Details</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for items in data %}
+          <tr>
+              <td class="align-middle text-center text-sm">
+                  <p class="text-xs font-weight-bold mb-0">{{items.payID}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                  <p class="text-xs font-weight-bold mb-0">{{items.payStatus}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                  <p class="text-xs font-weight-bold mb-0">$ {{items.payAmount}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+              <span class="text-secondary text-xs font-weight-bold"><a href="/customer/{{items.userID}}/uploadDocument/{{items.payID}}"> Details </a></span>
+              </td>
+      {% endfor %}
+      </tbody>
+    </table>
+<br>
+<div class="fill-in">
+  {% for info in user %}
+  <form action="/customer/{{info.userID}}/uploadDocument/submit" method="post" enctype="multipart/form-data">
+  {% endfor %}
+    <label for="payID">Payment ID</label>
+        <select name="payID" id="payID">
+          {% for items in data %}
+            <option value="{{items.payID}}">{{items.payID}}</option>
+          {% endfor %} 
+        </select><br>
+        <label for="payDoc">Upload Document</label>
+        <input type="file" name="payDoc"  required> <br>
+        <input type="submit" class="btn bg-gradient-primary mt-4" value="Submit" />
+  </form>
+</div>
+</div>
+{% if status == 'success' %}
+Upload successfully
+{% endif %}
+{% if status == 'fail_status' %}
+The payment status is not ready for upload document
+{% endif %}
+</div>
+{% endblock %}
+

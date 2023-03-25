@@ -1,0 +1,434 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 10px;
+    font-family: 'Roboto Slab', serif;
+}
+
+h2, h4{
+    font-family: 'Sofia Sans Extra Condensed', sans-serif;
+    padding: 5px;
+}
+
+.content{
+    padding: 0px 0px 0px 5px;
+    width: 102%;
+    margin: 0;
+}
+
+.inheritall{
+    all: initial;
+    all: unset;
+    all: inherit;
+    all: revert;
+    all: revert-layer;
+}
+.inheritall input[type=submit] {
+    all: initial;
+    all: unset;
+    all: inherit;
+    all: revert;
+    all: revert-layer;
+}
+
+button {
+    background-color: #fff;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: solid;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #a2cce7;
+}
+
+table  {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+
+table td{
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-size:14px;
+    overflow:hidden;
+    padding:10px 20px;
+    word-break:normal;
+    background-color:#fff;
+    text-align:left;
+    vertical-align:middle
+    
+}
+
+table th{
+    border-color:black;
+    border-style:solid;
+    border-width:1px;
+    font-size:14px;
+    font-weight:normal;
+    overflow:hidden;
+    padding: 10px 20px;
+    word-break:normal;
+    background-color:#4472C4;
+    color:#FFF;
+    font-weight:bold;
+    text-align:center;
+    vertical-align:middle
+}
+
+.btn {
+    cursor: pointer;
+    background: #fff;
+    display: inline-block;
+    padding: .2em 1em;
+    color: black;
+    border-radius: 3px;
+    outline-style: solid;
+    outline-color: black;
+}
+
+    .btn:hover,
+    .btn:focus {
+        background: #a2cce7;
+    }
+
+    .btn:active {
+        background: #267fcc;
+        box-shadow: 0 1px 2px rgba(0,0,0, .2) inset;
+    }
+
+.grid-container {
+    display: grid;
+    gap: 50px;
+    grid-template-columns: auto auto;
+    padding: 10px;
+}
+
+.grid-item {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.demo_pic_small {
+    width: 600px;
+    height: auto;
+    float: left;
+    margin: 0 1em 1em 0;
+}
+
+.demo_pic_big {
+    width: 800px;
+    height: auto;
+    float: center;
+    margin: 0 1em 1em 0;
+}
+
+/* [Object] Modal For Header
+ * =============================== */
+.header {
+    width: 96%;
+    min-height: 100vh;
+    background: #ffffff;
+    color: #525252;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background: #e9e9e9;
+    width: 100%;
+    padding: 10px 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.logo {
+    border-radius: 5px;
+    width: 100px;
+    height: auto;
+}
+
+.smallLogo {
+    border-radius: 5px;
+    width: 50px;
+    height: auto;
+}
+.user-name {
+    height: auto;
+    width: 45px;
+    text-align: center;
+    vertical-align: baseline;
+    border-radius: 50%;
+    cursor: pointer;
+    outline-style: solid;
+    outline-color: black;
+    font-size: 35px;
+    font-weight: bold;
+    margin: 0px 10px;
+    font-family: 'Sofia Sans Extra Condensed', sans-serif;
+}
+
+nav ul {
+    width: 100%;
+    text-align: left;
+}
+
+    nav ul li {
+        display: inline-block;
+        list-style: none;
+        margin: 10px 10px;
+    }
+
+        nav ul li a {
+            color: black;
+            padding: 10px 10px;
+            text-decoration: none;
+            font-family: 'Sofia Sans Extra Condensed', sans-serif;
+        }
+
+            nav ul li a:hover {
+                background: #a2cce7;
+            }
+
+            nav ul li a:active {
+                background: #4472C4;
+                color: white;
+                font-weight: bold;
+            }
+
+.sub-menu-wrap {
+    position: absolute;
+    top: 100%;
+    right: 1%;
+    width: 300px;
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height 0.5s;
+}
+
+    .sub-menu-wrap.open-menu {
+        max-height: 400px;
+    }
+
+.sub-menu {
+    background: white;
+    padding: 10px;
+    margin: 10px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+    .user-info h3 {
+        font-weight: bold;
+        font-family: 'Sofia Sans Extra Condensed', sans-serif;
+    }
+
+.sub-menu hr {
+    border: 0;
+    height: 2px;
+    width: 100%;
+    background: #ccc;
+    margin: 15px 0 10px;
+}
+
+.sub-menu-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #525252;
+    margin: 12px 0;
+}
+
+    .sub-menu-link p {
+        width: 100%;
+        font-family: 'Sofia Sans Extra Condensed', sans-serif;
+    }
+
+    .sub-menu-link img {
+        width: 40px;
+        background: #e5e5e5;
+        border-radius: 50%;
+        padding: 8px;
+        margin-right: 15px;
+    }
+
+    .sub-menu-link span {
+        font-size: 22px;
+        transition: transform 0.5s;
+    }
+
+    .sub-menu-link:hover span {
+        transform: translate(5px);
+    }
+
+    .sub-menu-link:hover p {
+        font-weight: 600;
+    }
+
+/* [Object] Modal For Popup screen
+ * =============================== */
+.modal {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background: rgba(0,0,0, .9);
+    transition: opacity .25s ease;
+}
+
+.modal__bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.modal-state {
+    display: none;
+}
+
+    .modal-state:checked + .modal {
+        opacity: 1;
+        visibility: visible;
+    }
+
+        .modal-state:checked + .modal .modal__inner {
+            top: 0;
+        }
+
+.modal__inner {
+    transition: top .25s ease;
+    position: absolute;
+    top: -20%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 60%;
+    margin: auto;
+    overflow: auto;
+    background: #fff;
+    border-radius: 5px;
+    padding: 1em 2em;
+    height:fit-content;
+    text-align: center;
+}
+
+.modal__close {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    width: 1.1em;
+    height: 1.1em;
+    cursor: pointer;
+}
+
+    .modal__close:after,
+    .modal__close:before {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 1.5em;
+        background: #ccc;
+        display: block;
+        transform: rotate(45deg);
+        left: 50%;
+        margin: -3px 0 0 -1px;
+        top: 0;
+    }
+
+    .modal__close:hover:after,
+    .modal__close:hover:before {
+        background: #aaa;
+    }
+
+    .modal__close:before {
+        transform: rotate(-45deg);
+    }
+
+@media screen and (max-width: 768px) {
+
+    .modal__inner {
+        width: 90%;
+        height: 90%;
+        box-sizing: border-box;
+    }
+}
+
+/* [Object] Modal For fill in form screen (Sign in, sign up...)
+ * =============================== */
+.fill-in form {
+    width: 100%;
+    max-width: 100em;
+    margin: auto;
+    color: #3f3a27;
+    background: #e9e9e9 url(http://davidrhysthomas.co.uk/linked/test.png) 35% 0 repeat-y;
+    padding: 0.5em;
+    text-align: left;
+}
+
+.fill-in input[type=submit], input[type=button] {
+    width:30%;
+    background-color: #fff;
+    color: black;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.fill-in input[type=submit]:hover {
+    background-color: #a2cce7;
+}
+
+.fill-in label, input[type=text], input[type=tel], input[type=email], input[type=password], input[type=number], input[type=file],select {
+    all: initial;
+    all: unset;
+    all: inherit;
+    all: revert;
+    all: revert-layer;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-bottom: 0.6em;    
+}
+
+.fill-in label {
+    width: 30%;
+    text-align: right;
+    margin: 0 10% 0 0;
+}
+
+.fill-in label:after {
+    content: ': ';
+}
+.fill-in input[type=text] {
+    width: 40%;
+}
+.fill-in select {
+    width: 20%;
+}
+.fill-in fieldset {
+    margin: 0 0 1em 0;
+}

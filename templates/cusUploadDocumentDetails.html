@@ -1,0 +1,71 @@
+﻿{% extends "/bootstrap/baseCustomer.html" %}
+{% block title %}Payment Details{% endblock %}
+{% block content %}
+<h2 class="text-primary">Payment Details</h2><br>
+
+<div class="card">
+  <div class="table-responsive">
+    <table class="table align-items-center mb-0">
+      <thead>
+        <tr>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order ID</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Period</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Start Date</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">End Date</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Confirm Date</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for items in data %}
+          <tr>
+            <td class="align-middle text-center text-sm">
+              <p class="text-xs font-weight-bold mb-0">{{items.subHID}}</p>
+          </td> 
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{items.productName}}</p>
+            </td>              
+              <td class="align-middle text-center text-sm">
+                  <p class="text-xs font-weight-bold mb-0">{{items.subHDay}} Days</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{items.subHstatus}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{items.subHStart}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{items.subHEnd}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{items.confirmDate}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">$ {{items.subAmount}}</p>
+              </td>
+          </tr>
+      {% endfor %}
+    </tbody>
+</table> 
+</div>
+<p id="total" class="text-primary">Total: ${{amount}}</p>
+<div class="fill-in">
+  {% for info in user %}
+  <form action="/customer/{{info.userID}}/uploadDocument/submit" method="post" enctype="multipart/form-data">
+  {% endfor %}
+    <label for="payID">Payment ID</label>
+        <select name="payID" id="payID">
+          {% for items in data %}
+            <option value="{{items.payID}}">{{items.payID}}</option>
+          {% endfor %} 
+        </select><br>
+        <label for="payDoc">Upload Document</label>
+        <input type="file" name="payDoc" required> <br>
+        <input type="submit" class="btn bg-gradient-primary mt-4" value="Submit" /><br>
+  </form>
+</div>
+</div>
+<input type="button" class="btn bg-gradient-primary mt-4" value="Back" onclick="history.back()">
+{% endblock %}

@@ -1,0 +1,71 @@
+﻿{% extends "/bootstrap/baseCustomer.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2 class="text-primary">Dashboard</h2>
+{% for info in user%}
+<h4>Hi {{info.name}},</h4><br>
+{% endfor %}
+<div class="card">
+    <div class="table-responsive">
+      <table class="table align-items-center mb-0">
+        <thead>
+          <tr>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subscription End Date</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Remaining</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">History</th>
+            <th class="text-secondary opacity-7"></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for items in data %}
+            <tr>
+                <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">{{items.productName}}</p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">{{items.subEnd}}</p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">{{items.remaining}} Days</p>
+                </td>
+                <td class="align-middle text-center">
+                    {% for info in user%}
+                  <span class="text-secondary text-xs font-weight-bold"><a href="/customer/{{info.userID}}/dashboard/{{items.prodID}}"> Details </a></span>
+                  {% endfor %}
+                </td>
+                <td class="align-middle">
+                    <div class="buttons">
+                        <label for="{{items.productName}}" class="btn bg-gradient-primary mt-4">Extend</label>
+                    </div>
+                 </td>
+              </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+{% for items in product %}
+    <input class="modal-state_cus" id="{{items.productName}}" type="checkbox" />
+    <div class="modal_cus">
+        <label class="modal__bg_cus" for="{{items.productName}}"></label>
+        <div class="modal__inner_cus">
+            <label class="modal__close_cus" for="{{items.productName}}"></label>
+            <h2>{{items.productName}}</h2>
+            <img src="/static/product/{{items.prodImg}}" class="demo_pic_big" /><br clear="all">
+            <p>Description: {{items.prodDescr}}<br /> Price: $ {{items.prodPrice}} per day </p> <br>
+            <div class="fill-in">
+                {% for info in user %}
+                <form action="/customer/{{info.userID}}/dashboard" method="post">
+                {% endfor %} 
+                    <input type="hidden" name="prodID" value={{items.prodID}}>
+                    <label for="day">Days</label>
+                    <input type="number" name="days" min="1" required /><br>
+                    <input type="submit" class="btn bg-gradient-primary mt-4" value="Add to cart" />
+                </form>
+            </div>
+        </div>
+    </div>    
+{% endfor %}        
+{% endblock %}
+</div>

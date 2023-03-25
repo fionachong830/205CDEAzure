@@ -1,0 +1,29 @@
+﻿{% extends "/bootstrap/baseStaff.html" %}
+{% block title %}New Product{% endblock %}
+{% block content %}
+<h2 class="text-primary">Add New Product</h2><br>
+<div class="fill-in">
+    {% for info in user %}
+    <form action="/staff/{{info.userID}}/addProduct/submit" method="post" enctype="multipart/form-data">
+    {% endfor %}
+        <label for="productName">Product Name</label>
+        <input type="text" name="productName" required> <br>
+        <label for="prodDescr">Description</label>
+        <input type="text" name="prodDescr" required> <br>
+        <label for="prodPrice">Price</label>
+        <input type="number" step="0.1" name="prodPrice" required> <br>
+        <label for="prodLink">URL of website</label>
+        <input type="url" name="prodLink" required> <br>
+        <label for="prodImg">Picture</label>
+        <input type="file" name="prodImg" required> <br>
+        <input type="submit" class="btn bg-gradient-primary mt-4" value="Submit"> <br>
+    </form>
+</div>
+{% if status == 'success' %}
+Add successfully
+{% endif %}
+{% if status == 'namedup' %}
+Product Name duplicated.
+{% endif %}
+<br><input type="button" class="btn bg-gradient-primary mt-4" value="Back" onclick="history.back()">
+{% endblock %} 

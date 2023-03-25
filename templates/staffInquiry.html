@@ -1,0 +1,56 @@
+﻿{% extends "/bootstrap/baseStaff.html" %}
+{% block title %}Inquiry{% endblock %}
+{% block content %}
+<h2 class="text-primary">Customer Inquiry</h2><br>
+<div class="card">
+  <div class="table-responsive">
+    <table class="table align-items-center mb-0">
+      <thead>
+        <tr>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Inquiry ID</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User ID</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Session</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Question</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subscription History ID</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Solved By</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Inquiry Status</th>
+          <th class="text-secondary opacity-7"></th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for items in data %}
+          <tr>
+            <td class="align-middle text-center text-sm">
+              <p class="text-xs font-weight-bold mb-0">{{items.inquiryID}}</p>
+          </td> 
+            <td class="align-middle text-center text-sm">
+              <p class="text-xs font-weight-bold mb-0">{{items.userID}}</p>
+          </td> 
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{items.session}}</p>
+            </td>              
+              <td class="align-middle text-center text-sm">
+                  <p class="text-xs font-weight-bold mb-0">{{items.question}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{items.subHID}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{items.solvedBy}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{items.inquiryStatus}}</p>
+              </td>
+              <td class="align-items-center text-sm">
+                {% for info in user%}
+                <form action="/staff/{{info.userID}}/inquiry" method="post">
+                    <input type="hidden" name="inquiryID" value={{items.inquiryID}} />
+                    <input class="btn bg-gradient-primary mt-4" type="submit" value="Close" />
+                {% endfor %}
+                </form>
+            </td>
+          </tr>
+      {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

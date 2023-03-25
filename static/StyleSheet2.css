@@ -1,0 +1,198 @@
+﻿
+@import url('https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@500&display=swap');
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+.smallLogo {
+    border-radius: 5px;
+    width: 25px;
+    height: auto;
+}
+.grid-container {
+    display: grid;
+    gap: 50px;
+    grid-template-columns: auto auto;
+    padding: 10px;
+}
+
+.grid-item {
+    background-color: #fff;
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.demo_pic_small {
+    width: 600px;
+    height: auto;
+    float: left;
+    margin: 0 1em 1em 0;
+}
+
+.demo_pic_big {
+    width: 800px;
+    height: auto;
+    float: center;
+    margin: 0 1em 1em 0;
+}
+
+/* [Object] Modal For Popup screen
+ * =============================== */
+.modal_cus {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    background: rgba(0,0,0, .9);
+    transition: opacity .25s ease;
+}
+
+.modal__bg_cus {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+}
+
+.modal-state_cus {
+    display: none;
+}
+
+    .modal-state_cus:checked + .modal_cus {
+        opacity: 1;
+        visibility: visible;
+    }
+
+        .modal-state_cus:checked + .modal_cus .modal__inner_cus {
+            top: 0;
+        }
+
+.modal__inner_cus {
+    transition: top .25s ease;
+    position: absolute;
+    top: -20%;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 60%;
+    margin: auto;
+    overflow: auto;
+    background: #fff;
+    border-radius: 5px;
+    padding: 1em 2em;
+    height:fit-content;
+    text-align: center;
+}
+
+.modal__close_cus {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    width: 1.1em;
+    height: 1.1em;
+    cursor: pointer;
+}
+
+    .modal__close_cus:after,
+    .modal__close_cus:before {
+        content: '';
+        position: absolute;
+        width: 2px;
+        height: 1.5em;
+        background: #ccc;
+        display: block;
+        transform: rotate(45deg);
+        left: 50%;
+        margin: -3px 0 0 -1px;
+        top: 0;
+    }
+
+    .modal__close_cus:hover:after,
+    .modal__close_cus:hover:before {
+        background: #aaa;
+    }
+
+    .modal__close_cus:before {
+        transform: rotate(-45deg);
+    }
+
+@media screen and (max-width: 768px) {
+
+    .modal__inner_cus {
+        width: 90%;
+        height: 90%;
+        box-sizing: border-box;
+    }
+}
+
+/* [Object] Modal For fill in form screen (Sign in, sign up...)
+ * =============================== */
+.fill-in form {
+    width: 100%;
+    max-width: 100em;
+    margin: auto;
+    color: #3f3a27;
+    background: #e9e9e9 url(http://davidrhysthomas.co.uk/linked/test.png) 35% 0 repeat-y;
+    padding: 0.5em;
+    text-align: left;
+}
+
+
+.fill-in input[type=submit]:hover {
+    background-color: #a2cce7;
+}
+
+.fill-in label, input[type=text], input[type=tel], input[type=email], input[type=password], input[type=number], input[type=file],select {
+    all: initial;
+    all: unset;
+    all: inherit;
+    all: revert;
+    all: revert-layer;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-bottom: 0.6em;    
+}
+
+.fill-in label {
+    width: 30%;
+    text-align: right;
+    margin: 0 10% 0 0;
+}
+
+.fill-in label:after {
+    content: ': ';
+}
+.fill-in input[type=text] {
+    width: 40%;
+}
+.fill-in select {
+    width: 20%;
+}
+.fill-in fieldset {
+    margin: 0 0 1em 0;
+}

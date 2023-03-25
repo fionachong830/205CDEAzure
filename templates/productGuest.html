@@ -1,0 +1,27 @@
+{% extends "/bootstrap/base.html" %}
+{% block title %}Product{% endblock %}
+{% block content %}
+<h2 class="text-primary">Product</h2><br>
+<div class="grid-container">
+    {% for items in product %}
+    <div class="grid-item">
+        <img src="/static/product/{{items.prodImg}}" class="demo_pic_small" />
+        <div class="buttons">
+            <label for="{{items.productName}}" class="btn bg-gradient-primary mt-4">{{items.productName}}</label>
+        </div>
+    </div>
+    {% endfor %}  
+</div>
+    {% for items in product %}
+    <input class="modal-state_cus" id="{{items.productName}}" type="checkbox" />
+    <div class="modal_cus">
+        <label class="modal__bg_cus" for="{{items.productName}}"></label>
+        <div class="modal__inner_cus">
+            <label class="modal__close_cus" for="{{items.productName}}"></label>
+            <h2>{{items.productName}}</h2>
+            <img src="/static/product/{{items.prodImg}}" class="demo_pic_big" /><br clear="all">
+            <p>Description: {{items.prodDescr}}<br /> Price: $ {{items.prodPrice}} per day </p> <br>
+        </div>
+    </div>    
+    {% endfor %}  
+{% endblock %}

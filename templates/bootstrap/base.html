@@ -1,0 +1,94 @@
+<!DOCTYPE html> 
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}{% endblock %} - Online Subscription</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='StyleSheet2.css')}}">
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-icons.css">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/nucleo-svg.css">
+    <link rel="stylesheet" href="https://demos.creative-tim.com/soft-ui-dashboard/assets/css/soft-ui-dashboard.min.css?v=1.0.2">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+</head>
+
+<body class="g-sidenav-show">
+    <div class="container position-sticky z-index-sticky top-0">
+        <div class="row">
+            <div class="col-12">
+                <nav class="navbar navbar-expand-lg  blur blur-rounded top-0 z-index-fixed shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
+                    <div class="container-fluid">
+                        <a class="navbar-brand font-weight-bolder ms-sm-3" href="/" rel="tooltip">Online Subsciption</a>
+                        <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon mt-2">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </span>
+                        </button>
+                        <div class="collapse navbar-collapse pt-3 pb-2 py-lg-0" id="navigation">
+                            <ul class="navbar-nav navbar-nav-hover ms-lg-12 ps-lg-5 w-100">
+                              <li class="nav-item dropdown dropdown-hover mx-2">
+                                <a href="/product" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center">
+                                    Product
+                                    </a>
+                            </li>
+                                <li class="nav-item dropdown dropdown-hover mx-2">
+                                    <a class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center" id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
+                                        G
+                                        <img src="https://demos.creative-tim.com/soft-ui-design-system/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-animation dropdown-md p-3 border-radius-lg mt-0 mt-lg-3" aria-labelledby="dropdownMenuPages">
+                                        <div class="d-none d-lg-block">
+                                          <p class="dropdown-item border-radius-md">
+                                            Guest
+                                          </p>
+                                            <a href="/login" class="dropdown-item border-radius-md">
+                                                Sign in 
+                                            </a>
+                                            <a href="/signup" class="dropdown-item border-radius-md">
+                                                Sign up
+                                            </a>
+                                            <a href="/forgotPassword" class="dropdown-item border-radius-md">
+                                                Forgot Password
+                                            </a>
+                                        </div>
+
+                                        <div class="d-lg-none">
+                                          <p class="dropdown-item border-radius-md">
+                                            Guest
+                                          </p>
+                                            <a href="/login"  class="dropdown-item border-radius-md">
+                                                Sign in 
+                                            </a>
+                                            <a href="/signup" class="dropdown-item border-radius-md">
+                                                Sign up
+                                            </a>
+                                            <a href="/forgotPassword" class="dropdown-item border-radius-md">
+                                                Forgot Password
+                                            </a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul> 
+                      </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <header class="">
+        <div class="page-header min-vh-100">
+            <div class="position-absolute fixed-top ms-auto w-50 h-100 z-index-0 d-none d-sm-none d-md-block" style="background-image: url(https://demos.creative-tim.com/soft-ui-design-system-pro/assets/img/curved-images/curved8.jpg); background-size:cover;"></div>
+            <div class="container">
+                {% block content %}{% endblock %} 
+            </div>
+        </div>
+    </header>
+    <script src="https://demos.creative-tim.com/soft-ui-dashboard/assets/js/core/popper.min.js"></script>
+    <script src="https://demos.creative-tim.com/soft-ui-dashboard/assets/js/core/bootstrap.min.js"></script>
+    <script src="https://demos.creative-tim.com/soft-ui-dashboard/assets/js/plugins/chartjs.min.js"></script>
+    <script src="https://demos.creative-tim.com/soft-ui-dashboard/assets/js/plugins/Chart.extension.js"></script>
+    <script src="https://demos.creative-tim.com/soft-ui-dashboard/assets/js/soft-ui-dashboard.min.js?v=1.0.2"></script>
+    </script>
+</body>
+</html>

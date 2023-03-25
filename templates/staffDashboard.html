@@ -1,0 +1,71 @@
+﻿{% extends "/bootstrap/baseStaff.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<h2 class="text-primary">Staff Dashboard</h2>
+{% for info in user%}
+<h4>Hi {{info.name}}, <br> <br>Customer subscription records</h4>
+{% endfor %}
+<div class="card">
+    <div class="table-responsive">
+      <table class="table align-items-center mb-0">
+        <thead>
+          <tr>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User ID</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Product</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Subscription End Date</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Remaining</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">History</th>
+            <th class="text-secondary opacity-7"></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for items in data %}
+            <tr>
+                <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">{{items.userID}}</p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">{{items.productName}}</p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">{{items.subEnd}}</p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">{{items.remaining}} Days</p>
+                </td>
+                <td class="align-middle text-center">
+                    {% for info in user%}
+                  <span class="text-secondary text-xs font-weight-bold"><a href="/staff/{{info.userID}}/dashboard/{{items.userID}}/{{items.prodID}}"> Details </a></span>
+                  {% endfor %}
+                </td>
+                <td class="align-middle">
+                    <div class="buttons">
+                        <label for="{{items.productName}}.{{items.userID}}" class="btn bg-gradient-primary mt-4">Extend</label>
+                    </div>
+                 </td>
+              </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    {% for items in data %}
+    <input class="modal-state_cus" id="{{items.productName}}.{{items.userID}}" type="checkbox" />
+    <div class="modal_cus">
+        <label class="modal__bg_cus" for="{{items.productName}}.{{items.userID}}"></label>
+        <div class="modal__inner_cus">
+            <label class="modal__close_cus" for="{{items.productName}}.{{items.userID}}"></label>
+            <h2 class="text-primary">Route System for {{items.userName}} ({{items.userID}})</h2>
+            <div class="fill-in">    
+                {% for info in user%}
+                <form action="/staff/{{info.userID}}/buy" method="post">
+                {% endfor %}
+                    <input type="hidden" name="userID" value={{items.userID}}>
+                    <input type="hidden" name="prodID" value={{items.prodID}}>
+                    <label for="days">Days</label> 
+                    <input type="number" name="days" min="1" required /><br>
+                    <input type="submit" onclick=confirmFunction() value="Confirm" />
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %} 
+{% endblock %}

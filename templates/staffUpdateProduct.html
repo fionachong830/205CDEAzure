@@ -1,0 +1,72 @@
+﻿{% extends "/bootstrap/baseStaff.html" %}
+{% block title %}Update Product{% endblock %}
+{% block content %}
+<h2 class="text-primary">Update Product</h2><br>
+{% for info in user%}
+<div class="buttons">
+    <button type="button" class="btn bg-gradient-primary mt-4" onclick="window.location.href='/staff/{{info.userID}}/addProduct'">Add New Product</button>
+</div>
+{% endfor %}
+<div class="grid-container">
+    {% for items in product %}
+        <div class="grid-item">
+            <img src="/static/product/{{items.prodImg}}" class="demo_pic_small" />
+            <div class="buttons">
+                <label for="{{items.productName}}" class="btn bg-gradient-primary mt-4">{{items.productName}}</label>
+            </div>
+        </div>
+    {% endfor %}  
+</div>
+{% for items in product %}
+<input class="modal-state_cus" id="{{items.productName}}" type="checkbox" />
+<div class="modal_cus">
+    <label class="modal__bg_cus" for="{{items.productName}}"></label>
+    <div class="modal__inner_cus">
+        <label class="modal__close_cus" for="{{items.productName}}"></label>
+        <h2>{{items.productName}}</h2>
+        <div class="fill-in">
+            {% for info in user %}
+            <form action="/staff/{{info.userID}}/updateProduct/submit" method="post">
+            {% endfor %}
+                <input type="hidden" name="prodID" value="{{items.prodID}}">
+                <label for="productName">Product Name</label>
+                <input type="text" name="productName" value="{{items.productName}}" required> <br>
+                <label for="description">Description</label>
+                <input type="text" name="prodDescr" value="{{items.prodDescr}}" required> <br>
+                <label for="price">Price</label>
+                <input type="number" step="0.1" name="prodPrice" value={{items.prodPrice}} required> <br>
+                <label for="url">URL of website</label>
+                <input type="url" name="prodLink" value="{{items.prodLink}}" required> <br>
+                <input type="submit" class="btn bg-gradient-primary mt-4" value="Update" />
+            </form>
+        </div>
+    </br>
+        <div class="fill-in">
+            {% for info in user %}
+            <form action="/staff/{{info.userID}}/updateProduct/submitpic" method="post" enctype="multipart/form-data">
+            {% endfor %}
+                <input type="hidden" name="prodID" value="{{items.prodID}}">
+                <label for="picture">Picture</label>
+                <input type="file" name="prodImg" required> <br>
+                <input type="submit" class="btn bg-gradient-primary mt-4" value="Upload" />
+            </form>
+        </div>
+    </br>
+    <div class="fill-in">
+        {% for info in user %}
+        <form action="/staff/{{info.userID}}/updateProduct/delete" method="post">
+        {% endfor %}
+            <input type="hidden" name="prodID" value="{{items.prodID}}">
+            <input type="submit" class="btn bg-gradient-primary mt-4" value="delete" />
+        </form>
+    </div>
+    </div>
+</div>
+{% endfor %}  
+{% if status == 'success' %}
+Update successfully
+{% endif %}
+{% if status == 'namedup' %}
+Product Name duplicated.
+{% endif %}
+{% endblock %}

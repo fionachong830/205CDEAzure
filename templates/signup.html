@@ -1,0 +1,36 @@
+﻿{% extends "/bootstrap/base.html" %}
+{% block title %}Account Registration{% endblock %}
+{% block content %}
+<h2 class="text-primary">Account Registration</h2><br>
+<div class="fill-in">
+    <form action="/signup" method="post">
+        <label for="name">Name</label>
+        <input type="text" name="name" required /> <br>
+        <label for="phoneNo">Phone Number</label>
+        <input type="tel" name="phoneNo" required /> <br>
+        <label for="email">Email</label>
+        <input type="email" name="email" required /> <br>
+        <label for="userName">User Name</label>
+        <input type="text" name="userName" required /> <br>
+        <label for="password">Password</label>
+        <input type="password" name="password" required /> <br>
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="password" name="confirmPassword" required /> <br>
+        <input type="checkbox" id="t&c" required /> <a href="#">Terms and Conditions</a><br>
+        <input type="submit" class="btn bg-gradient-primary mt-4" value="Submit" /> <br>
+    </form>
+    {% if status == 'usernamedup' %}
+    Your username duplicated. Please sign in or use another username. Thank you.
+    {% endif %}
+    {% if status == 'phoneNodup' %}
+    Your phone number duplicated. Please sign in or use another phone number. Thank you.
+    {% endif %}
+    {% if status == 'emaildup' %}
+    Your email duplicated. Please sign in or use another email. Thank you.
+    {% endif %}
+    {% if status == 'invalidConfirmPassword' %}
+    Your confirm password is not same with your password. Please try again. Thank you.
+    {% endif %}
+</div>
+<input type="button" class="btn bg-gradient-primary mt-4" value="Back" onclick="history.back()">
+{% endblock %}

@@ -1,0 +1,33 @@
+﻿{% extends "/bootstrap/baseCustomer.html" %}
+{% block title %}Personal Information{% endblock %}
+{% block content %}
+<h2 class="text-primary">Edit Personal Information</h2><br>
+{% for info in user%}
+<div class="fill-in">
+    <form action="/customer/{{info.userID}}/personalInfo" method="post">
+        <label for="name">Name</label>
+        <input type="text" name="name" value="{{info.name}}" required> <br>
+        <label for="phoneNo">Phone Number</label>
+        <input type="tel" name="phoneNo" value="{{info.phoneNo}}" required> <br>
+        <label for="email">Email</label>
+        <input type="email" name="email" value="{{info.email}}" required> <br>
+        <label for="userName">User Name</label>
+        <input type="text" name="userName" value="{{info.userName}}" required> <br>
+        <input type="submit" class="btn bg-gradient-primary mt-4" value="Update">
+    </form>
+</div>
+{% endfor %}
+{% if status == 'usernamedup' %}
+Your username duplicated. Please use another username. Thank you.
+{% endif %}
+{% if status == 'phoneNodup' %}
+Your phone number duplicated. Please use another phone number. Thank you.
+{% endif %}
+{% if status == 'emaildup' %}
+Your email duplicated. Please use another email. Thank you.
+{% endif %}
+{% if status == 'success' %}
+Updated successfully. Thank you.
+{% endif %}
+{% endblock %}
+

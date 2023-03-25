@@ -1,0 +1,90 @@
+CREATE TABLE userInfo(
+userID INT(8) ZEROFILL NOT NULL AUTO_INCREMENT,
+userName VARCHAR(50) NOT NULL UNIQUE,
+password VARCHAR(50) NOT NULL ,
+money DOUBLE(10,2) NOT NULL DEFAULT 50.00, 
+name VARCHAR(50) NOT NULL ,
+phoneNo INT(8) NOT NULL UNIQUE,
+email VARCHAR(50) NOT NULL UNIQUE,
+role ENUM("C","S") NOT NULL,
+loginStatus BOOLEAN NOT NULL,
+PRIMARY KEY(userID)
+);
+
+CREATE TABLE product(
+prodID INT(8) ZEROFILL NOT NULL AUTO_INCREMENT,
+productName VARCHAR(50) NOT NULL UNIQUE,
+prodDescr VARCHAR(1000),
+prodLink VARCHAR(200) NOT NULL,
+prodImg VARCHAR(100),
+prodPrice DOUBLE(10,2) NOT NULL,
+lastUpdate TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+deletedInd ENUM("Y","N") NOT NULL DEFAULT "N",
+PRIMARY KEY(prodID)
+);
+
+CREATE TABLE subscription(
+subID INT(8) ZEROFILL NOT NULL AUTO_INCREMENT,
+subStart DATE NOT NULL,
+subEnd DATE NOT NULL,
+subStatus ENUM('Expired','Ongoing','Pending') NOT NULL DEFAULT 'Ongoing',
+userID INT(8) ZEROFILL NOT NULL,
+prodID INT(8) ZEROFILL NOT NULL,
+PRIMARY KEY(subID),
+FOREIGN KEY (userID) REFERENCES userInfo(userID),
+FOREIGN KEY (prodID) REFERENCES product(prodID)
+);
+
+CREATE TABLE payment(
+payID INT(8) ZEROFILL NOT NULL AUTO_INCREMENT,
+payAmount DOUBLE(10,2) NOT NULL ,
+payStatus ENUM('Pending for Payment','Pending for Approval','Approved','Returned','Rejected') NOT NULL DEFAULT "Pending for Payment",
+payDoc VARCHAR(100),
+confirmBy INT(8) ZEROFILL,
+confirmDate DATE,
+userID INT(8) ZEROFILL NOT NULL,
+PRIMARY KEY(payID),
+FOREIGN KEY (userID) REFERENCES userInfo(userID)
+);
+
+CREATE TABLE subHistory(
+subHID INT(8) ZEROFILL NOT NULL AUTO_INCREMENT,
+subHStart DATE,
+subHEnd DATE,
+subHDay INT NOT NULL,
+payID INT(8) ZEROFILL  NOT NULL,
+subAmount DOUBLE(10,2) NOT NULL,
+subHstatus ENUM('Pending for Payment','Pending for Approval','Approved','Returned','Rejected','Refunded') NOT NULL DEFAULT "Pending for Payment",
+userID INT(8) ZEROFILL  NOT NULL,
+prodID INT(8) ZEROFILL  NOT NULL,
+PRIMARY KEY(subHID),
+FOREIGN KEY (userID) REFERENCES userInfo(userID),
+FOREIGN KEY (prodID) REFERENCES product(prodID),
+FOREIGN KEY (payID) REFERENCES payment(payID)
+);
+
+CREATE TABLE inquiry(
+inquiryID INT(8) ZEROFILL NOT NULL AUTO_INCREMENT,
+session VARCHAR(30) NOT NULL,
+question VARCHAR(200) NOT NULL,
+userID INT(8) ZEROFILL NOT NULL,
+subHID INT(8) ZEROFILL,
+solvedBy INT(8) ZEROFILL, 
+PRIMARY KEY(inquiryID),
+FOREIGN KEY (userID) REFERENCES userInfo(userID),
+FOREIGN KEY (solvedBy) REFERENCES userInfo(userID),
+FOREIGN KEY (subHID) REFERENCES subHistory(subHID)
+);
+
+INSERT INTO product(prodDescr, prodLink, prodImg, prodPrice, productName, lastUpdate) VALUES ('This is a system about route.', 'http://52.91.24.182/cgi-bin/apihtml.py', 'routeSystem.png', 2, 'Route System', '2023-02-18 17:36:08');
+INSERT INTO product(prodDescr, prodLink, prodImg, prodPrice, productName, lastUpdate) VALUES ('This is a system about Loan Table.', 'http://52.91.24.182/cgi-bin/loantable.py', 'loantable.png', 1, 'Loan Table', '2023-02-18 18:36:08');
+
+INSERT INTO userInfo(userName, password, name, phoneNo, email, role, loginStatus) VALUES ('fiona0830', '1234', 'Fiona', '12345678', 'fionachong830@gmail.com', "C", 1);
+INSERT INTO userInfo(userName, password, name, phoneNo, email, role, loginStatus) VALUES ('Sfiona0830', '1234', 'Fiona', '12345679', 'ffiona0830@gmail.com', "S", 1);
+
+INSERT INTO subscription(subStart, subEnd, userID, prodID) VALUES ('2023-02-18', '2023-02-21', 1, 1);
+INSERT INTO subscription(subStart, subEnd, userID, prodID) VALUES ('2023-02-18', '2023-02-22', 1, 2);
+
+INSERT INTO payment(payAmount,userID) VALUE (10.00, 1);
+INSERT INTO subHistory(subHDay, payID, subAmount,userID, prodID) VALUES(6, 1, 6, 1, 2);
+INSERT INTO subHistory(subHDay, payID, subAmount,userID, prodID) VALUES(2, 1, 4, 1, 1);

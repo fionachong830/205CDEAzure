@@ -1,0 +1,74 @@
+﻿{% extends "/bootstrap/baseStaff.html" %}
+{% block title %}Approver Corner{% endblock %}
+{% block content %}
+<h2 class="text-primary">Approver Corner</h2><br>
+
+<div class="card">
+    <div class="table-responsive">
+      <table class="table align-items-center mb-0">
+        <thead> 
+          <tr>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User ID</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Order ID</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Total</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
+            <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Document</th>
+            <th class="text-secondary opacity-7"></th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for items in data %}
+            <tr>
+                <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">{{items.userID}}</p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">{{items.payID}}</p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">$ {{items.payAmount}}</p>
+                </td>
+                <td class="align-middle text-center text-sm">
+                    <p class="text-xs font-weight-bold mb-0">{{items.payStatus}}</p>
+                </td>
+                <td class="align-middle">
+                    <div class="buttons">
+                        <label for="{{items.payDoc}}" class="btn bg-gradient-primary mt-4">View</label>
+                    </div>
+                 </td>
+                <td class="align-items-center text-sm">
+                    {% for info in user%}
+                    <form action="/staff/{{info.userID}}/approverCorner/submit" method="post">
+                        <input type="hidden" name="payID" value={{items.payID}} />
+                        <input type="hidden" name="status" value="Approved" />
+                        <input class="btn bg-gradient-primary mt-4" type="submit" value="Approve" />
+                    </form>
+                    <form action="/staff/{{info.userID}}/approverCorner/submit" method="post">
+                        <input type="hidden" name="payID" value={{items.payID}} />
+                        <input type="hidden" name="status" value="Rejected" />
+                        <input class="btn" type="submit" value="Reject" />
+                    </form>
+                    <form action="/staff/{{info.userID}}/approverCorner/submit" method="post">
+                        <input type="hidden" name="payID" value={{items.payID}} />
+                        <input type="hidden" name="status" value="Returned" />
+                        <input class="btn" type="submit" value="Return" />
+                    </form>
+                    {% endfor %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+      </table> 
+    </div>
+{% for items in data %}
+    <input class="modal-state_cus" id="{{items.payDoc}}" type="checkbox" />
+    <div class="modal_cus">
+        <label class="modal__bg_cus" for="{{items.payDoc}}"></label>
+        <div class="modal__inner_cus">
+            <label class="modal__close_cus" for="{{items.payDoc}}"></label>
+            <img src="/static/uploadDoc/{{items.payDoc}}" class="demo_pic_big" /><br clear="all">
+        </div>
+    </div>    
+{% endfor %}
+</div>
+{% endblock %}
