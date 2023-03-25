@@ -40,7 +40,7 @@ app.config['MAIL_SERVER'] = 'smtp.sendgrid.net'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'apikey'
-app.config['MAIL_PASSWORD'] = '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'
+app.config['MAIL_PASSWORD'] = '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'
 ''''os.environ.get('SENDGRID_API_KEY')'''
 app.config['MAIL_DEFAULT_SENDER'] = 'testingtestinguat2@gmail.com'
 os.environ.get('MAIL_DEFAULT_SENDER')
