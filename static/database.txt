@@ -70,6 +70,7 @@ question VARCHAR(200) NOT NULL,
 userID INT(8) ZEROFILL NOT NULL,
 subHID INT(8) ZEROFILL,
 solvedBy INT(8) ZEROFILL, 
+inquiryStatus ENUM('Pending', 'Closed') NOT NULL DEFAULT('Closed'),
 PRIMARY KEY(inquiryID),
 FOREIGN KEY (userID) REFERENCES userInfo(userID),
 FOREIGN KEY (solvedBy) REFERENCES userInfo(userID),
@@ -79,12 +80,5 @@ FOREIGN KEY (subHID) REFERENCES subHistory(subHID)
 INSERT INTO product(prodDescr, prodLink, prodImg, prodPrice, productName, lastUpdate) VALUES ('This is a system about route.', 'http://52.91.24.182/cgi-bin/apihtml.py', 'routeSystem.png', 2, 'Route System', '2023-02-18 17:36:08');
 INSERT INTO product(prodDescr, prodLink, prodImg, prodPrice, productName, lastUpdate) VALUES ('This is a system about Loan Table.', 'http://52.91.24.182/cgi-bin/loantable.py', 'loantable.png', 1, 'Loan Table', '2023-02-18 18:36:08');
 
-INSERT INTO userInfo(userName, password, name, phoneNo, email, role, loginStatus) VALUES ('fiona0830', '1234', 'Fiona', '12345678', 'fionachong830@gmail.com', "C", 1);
-INSERT INTO userInfo(userName, password, name, phoneNo, email, role, loginStatus) VALUES ('Sfiona0830', '1234', 'Fiona', '12345679', 'ffiona0830@gmail.com', "S", 1);
-
-INSERT INTO subscription(subStart, subEnd, userID, prodID) VALUES ('2023-02-18', '2023-02-21', 1, 1);
-INSERT INTO subscription(subStart, subEnd, userID, prodID) VALUES ('2023-02-18', '2023-02-22', 1, 2);
-
-INSERT INTO payment(payAmount,userID) VALUE (10.00, 1);
-INSERT INTO subHistory(subHDay, payID, subAmount,userID, prodID) VALUES(6, 1, 6, 1, 2);
-INSERT INTO subHistory(subHDay, payID, subAmount,userID, prodID) VALUES(2, 1, 4, 1, 1);
+INSERT INTO userInfo(userName, password, name, phoneNo, email, role, loginStatus) VALUES ('fiona0830', '1234', 'Fiona', '12345678', 'fionachong830@gmail.com', "C", 0);
+INSERT INTO userInfo(userName, password, name, phoneNo, email, role, loginStatus) VALUES ('Sfiona0830', '1234', 'Fiona', '12345679', 'ffiona0830@gmail.com', "S", 0);
