@@ -8,9 +8,13 @@ import pymysql
 from fileinput import filename
 import mysql.connector
 from mysql.connector import errorcode
+from azure.storage.fileshare import ShareServiceClient
 
 app = Flask(__name__)
 cart=[]
+
+connection_string = "DefaultEndpointsProtocol=https;AccountName=wpstorage77be0ae4f2;AccountKey=1aPUATJlKBRUg5gEAh0/DuGLtIeflB3lWZ/wlIkHqk6b5ZvAAbyxGHkY+ZXOBL6wFqiV5ZTJctHP+AStCayHqA==;BlobEndpoint=https://wpstorage77be0ae4f2.blob.core.windows.net/;FileEndpoint=https://wpstorage77be0ae4f2.file.core.windows.net/;TableEndpoint=https://wpstorage77be0ae4f2.table.core.windows.net/;QueueEndpoint=https://wpstorage77be0ae4f2.queue.core.windows.net/"
+service = ShareServiceClient.from_connection_string(conn_str=connection_string)
 
 app.config['SECRET_KEY'] = 'top-secret!'
 app.config['MAIL_SERVER'] = 'smtp.sendgrid.net'
