@@ -392,8 +392,6 @@ def cusUploadDocument(id):
 @app.route("/customer/<int:id>/uploadDocument/submit", methods=['POST','GET'])
 def cusUploadDocumentSubmit(id):
     if checkLoginStatus(id) == True:  
-        UPLOAD_FOLDER = '/Users/fionachong/205CDE/static/uploadDoc'
-        app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
         user = getUserInfo(id)
         if request.method == 'POST':
             payID = request.form['payID']
@@ -408,16 +406,16 @@ def cusUploadDocumentSubmit(id):
                         try:
                             container_client_doc.upload_blob(file.filename, file) # upload the file to the container using the filename as the blob name
                             filenames += file.filename + "<br /> "
+                            sql = 'UPDATE payment SET payDoc="{doc}", payStatus="Pending for Approval" WHERE payID={payID}'
+                            cursor.execute(sql.format(payID=payID, doc=payDoc.filename))
+                            connection.commit()
+                            sql = 'UPDATE subHistory SET subHstatus="Pending for Approval" WHERE payID={payID}'
+                            cursor.execute(sql.format(payID=payID))
+                            connection.commit()
+                            status='success'                            
                         except Exception as e:
                             print(e)
                             print("Ignoring duplicate filenames") # ignore duplicate filenames              
-                    sql = 'UPDATE payment SET payDoc="{doc}", payStatus="Pending for Approval" WHERE payID={payID}'
-                    cursor.execute(sql.format(payID=payID, doc=payDoc.filename))
-                    connection.commit()
-                    sql = 'UPDATE subHistory SET subHstatus="Pending for Approval" WHERE payID={payID}'
-                    cursor.execute(sql.format(payID=payID))
-                    connection.commit()
-                    status='success'
                 else:
                     status='fail_status'
         sql = '''    
