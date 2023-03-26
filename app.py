@@ -806,6 +806,16 @@ def staffApproverCornerSubmit(id):
     else: 
         return render_template('404.html'), 404
 
+@app.route("/staff/<int:id>/account", methods=['GET'])
+def staffAccount(id):
+    if checkLoginStatus(id) == True:
+        user = getUserInfo(id)    
+        cursor.execute('SELECT * FROM userInfo WHERE role="c"')
+        data = cursor.fetchall()
+        return render_template('staffAccount.html', user=user, data=data)
+    else: 
+        return render_template('404.html'), 404
+
 @app.route("/staff/<int:id>/addAccount", methods=['POST', 'GET'])
 def staffAddAccount(id):
     if checkLoginStatus(id) == True:
@@ -847,7 +857,7 @@ def staffAddAccount(id):
         else: 
             return render_template('staffAddAccount.html', user=user, status=None)
     else: 
-        return render_template('staffAddAccount.html', user=user, status=None)
+        return render_template('404.html'), 404
 
 @app.route("/staff/<int:id>/inquiry", methods=['POST', 'GET'])
 def staffInquiry(id):

@@ -1,0 +1,56 @@
+﻿{% extends "/bootstrap/baseStaff.html" %}
+{% block title %}Account{% endblock %}
+{% block content %}
+<h2 class="text-primary">Customer Account Info</h2>
+{% for info in user %}
+<div class="buttons">
+    <button type="button" class="btn bg-gradient-primary mt-4" onclick="window.location.href='/staff/{{info.userID}}/addAccount'">Add New Account</button><br>
+</div>
+{% endfor %}
+<div class="card">
+  <div class="table-responsive">
+    <table class="table align-items-center mb-0">
+      <thead>
+        <tr>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User ID</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">User Name</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Password</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Money</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Phone No</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Email</th>
+          <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Login Status</th>
+        </tr>
+      </thead>
+      <tbody>
+          {% for items in data %}
+          <tr>
+            <td class="align-middle text-center text-sm">
+              <p class="text-xs font-weight-bold mb-0">{{items.userID}}</p>
+          </td> 
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{items.userName}}</p>
+            </td>              
+              <td class="align-middle text-center text-sm">
+                  <p class="text-xs font-weight-bold mb-0">{{items.password}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">$ {{items.money}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{items.name}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{items.phoneNo}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">{{items.email}}</p>
+              </td>
+              <td class="align-middle text-center text-sm">
+                <p class="text-xs font-weight-bold mb-0">$ {{items.loginStatus}}</p>
+              </td>
+          </tr>
+      {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

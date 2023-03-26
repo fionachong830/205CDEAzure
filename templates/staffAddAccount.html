@@ -3,7 +3,7 @@
 {% block content %}
 <h2 class="text-primary">Create New Account</h2><br>
 <div class="fill-in">
-    {% for info in user%}
+    {% for info in user%} 
     <form action="/staff/{{info.userID}}/addAccount" method="post">
     {% endfor %}
         <label for="accType" id="accType">Choose a account type</label>
@@ -41,4 +41,5 @@
     Create successfully Thank you.
     {% endif %}
 </div>
+<br><input type="button" class="btn bg-gradient-primary mt-4" value="Back" onclick="history.back()">
 {% endblock %}
