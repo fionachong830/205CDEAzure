@@ -15,6 +15,7 @@
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Remaining</th>
             <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">History</th>
             <th class="text-secondary opacity-7"></th>
+            <th class="text-secondary opacity-7"></th>
           </tr>
         </thead>
         <tbody>
@@ -34,6 +35,11 @@
                   <span class="text-secondary text-xs font-weight-bold"><a href="/customer/{{info.userID}}/dashboard/{{items.prodID}}"> Details </a></span>
                   {% endfor %}
                 </td>
+                <td class="align-middle">
+                    <div class="buttons">
+                        <span class="btn bg-gradient-primary mt-4"><a href="{{items.prodLink}}"target="_blank" > Go to the system </a></span>
+                    </div>
+                 </td>
                 <td class="align-middle">
                     <div class="buttons">
                         <label for="{{items.productName}}" class="btn bg-gradient-primary mt-4">Extend</label>

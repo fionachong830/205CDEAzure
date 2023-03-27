@@ -197,14 +197,14 @@ def logout(id):
     cart=[]
     return render_template('login.html')
 
-"Customer app route"
+"Customer app route" 
 @app.route("/customer/<int:id>/dashboard", methods=['POST', 'GET'])
 def cusDashboard(id):
     if checkLoginStatus(id) == True:
         sql = '''    
         select *, DATEDIFF(subscription.subEnd, CURDATE()) as remaining 
         from product, subscription, userInfo
-        where product.prodID=subscription.prodID and userInfo.userID=subscription.userID and userInfo.userID={id} and product.deletedInd='N'
+        where product.prodID=subscription.prodID and userInfo.userID=subscription.userID and userInfo.userID={id} and product.deletedInd='N' and subscription.subEnd>=CURDATE()
         '''
         cursor.execute(sql.format(id=id))
         data = cursor.fetchall()
