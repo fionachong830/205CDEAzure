@@ -37,7 +37,7 @@
                 </td>
                 <td class="align-middle">
                     <div class="buttons">
-                        <span class="btn bg-gradient-primary mt-4"><a href="{{items.prodLink}}"target="_blank" > Go to the system </a></span>
+                        <label for="{{items.productName}}_alive" class="btn bg-gradient-primary mt-4">Use Now</label>
                     </div>
                  </td>
                 <td class="align-middle">
@@ -70,6 +70,18 @@
                     <input type="submit" class="btn bg-gradient-primary mt-4" value="Add to cart" />
                 </form>
             </div>
+        </div>
+    </div>    
+{% endfor %}        
+
+{% for items in product %}
+    <input class="modal-state_cus" id="{{items.productName}}_alive" type="checkbox" />
+    <div class="modal_cus">
+        <label class="modal__bg_cus" for="{{items.productName}}_alive"></label>
+        <div class="modal__inner_cus">
+            <label class="modal__close_cus" for="{{items.productName}}_alive"></label>
+            <h2>{{items.productName}}</h2>
+            <iframe src="{{items.prodLink}}" width=100% height=500></iframe>
         </div>
     </div>    
 {% endfor %}        
