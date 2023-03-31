@@ -14,7 +14,7 @@ from azure.storage.blob import BlobServiceClient
 app = Flask(__name__)
 cart=[]
 
-connect_str = 'DefaultEndpointsProtocol=https;AccountName=wpstorage77be0ae4f2;AccountKey=1aPUATJlKBRUg5gEAh0/DuGLtIeflB3lWZ/wlIkHqk6b5ZvAAbyxGHkY+ZXOBL6wFqiV5ZTJctHP+AStCayHqA==;EndpointSuffix=core.windows.net'
+connect_str = os.environ.get('AZURE_STORAGEFILE_CONNECTIONSTRING')
 # retrieve the connection string from the environment variable
 
 container_product = "product" # container name in which images will be store in the storage account
@@ -40,7 +40,7 @@ app.config['MAIL_SERVER'] = 'smtp.sendgrid.net'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USERNAME'] = 'apikey'
-app.config['MAIL_PASSWORD'] = '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'
+app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD') 
 app.config['MAIL_DEFAULT_SENDER'] = 'testingtestinguat1@gmail.com'
 mail = Mail(app)
 ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg'}
@@ -48,7 +48,7 @@ ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg'}
 bootstrap = Bootstrap(app)
 
 try:
-   connection = pymysql.connect(user="fiona0830", password="Cn921121@3", host=os.environ.get('AZURE_MYSQL_HOST'), port=3306, database="205cde", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False, local_infile = 1, cursorclass=pymysql.cursors.DictCursor)
+   connection = pymysql.connect(user=os.environ.get('AZURE_MYSQL_USER'), password=os.environ.get('AZURE_MYSQL_PASSWORD'), host=os.environ.get('AZURE_MYSQL_HOST'), port=3306, database="205cde", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False, local_infile = 1, cursorclass=pymysql.cursors.DictCursor)
    print("Connection established")
 except mysql.connector.Error as err:
   if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
