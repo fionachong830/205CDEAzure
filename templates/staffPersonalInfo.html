@@ -3,6 +3,7 @@
 {% block content %}
 <h2 class="text-primary">Edit Personal Information</h2><br>
 {% for info in user%}
+<!-- Staff Edit personal Information Form -->
 <div class="fill-in">
     <form action="/customer/{{info.userID}}/personalInfo" method="post">
         <label for="name">Name</label>

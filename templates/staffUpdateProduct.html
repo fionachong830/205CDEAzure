@@ -3,10 +3,12 @@
 {% block content %}
 <h2 class="text-primary">Update Product</h2><br>
 {% for info in user%}
+<!-- Add Product Button -->
 <div class="buttons">
     <button type="button" class="btn bg-gradient-primary mt-4" onclick="window.location.href='/staff/{{info.userID}}/addProduct'">Add New Product</button>
 </div>
 {% endfor %}
+<!-- Product Grid Container -->
 <div class="grid-container">
     {% for items in product %}
         <div class="grid-item">
@@ -17,6 +19,7 @@
         </div>
     {% endfor %}  
 </div>
+<!-- Pop up Screen for update information -->
 {% for items in product %}
 <input class="modal-state_cus" id="{{items.productName}}" type="checkbox" />
 <div class="modal_cus">
@@ -24,6 +27,7 @@
     <div class="modal__inner_cus">
         <label class="modal__close_cus" for="{{items.productName}}"></label>
         <h2>{{items.productName}}</h2>
+        <!-- Update wording details -->
         <div class="fill-in">
             {% for info in user %}
             <form action="/staff/{{info.userID}}/updateProduct/submit" method="post">
@@ -41,6 +45,7 @@
             </form>
         </div>
     </br>
+    <!-- Update Product Img -->
         <div class="fill-in">
             {% for info in user %}
             <form action="/staff/{{info.userID}}/updateProduct/submitpic" method="post" enctype="multipart/form-data">
@@ -52,6 +57,7 @@
             </form>
         </div>
     </br>
+    <!-- Delete Product -->
     <div class="fill-in">
         {% for info in user %}
         <form action="/staff/{{info.userID}}/updateProduct/delete" method="post">

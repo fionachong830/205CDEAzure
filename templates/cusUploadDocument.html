@@ -4,6 +4,7 @@
 <h2 class="text-primary">Upload Document</h2><br>
 <h4>Pending for Payment Orders:</h4>
 <div class="card">
+  <!-- Pending Upload Document Table -->
   <div class="table-responsive">
     <table class="table align-items-center mb-0">
       <thead>
@@ -33,6 +34,7 @@
       </tbody>
     </table>
 <br>
+<!-- Submit Document Form -->
 <div class="fill-in">
   {% for info in user %}
   <form action="/customer/{{info.userID}}/uploadDocument/submit" method="post" enctype="multipart/form-data">

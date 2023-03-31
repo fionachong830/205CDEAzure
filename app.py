@@ -48,7 +48,7 @@ ALLOWED_EXTENSIONS = {'pdf', 'png', 'jpg', 'jpeg'}
 bootstrap = Bootstrap(app)
 
 try:
-   connection = pymysql.connect(user="fiona0830", password="Cn921121@3", host="fiona0830.mysql.database.azure.com", port=3306, database="205cde", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False, local_infile = 1, cursorclass=pymysql.cursors.DictCursor)
+   connection = pymysql.connect(user="fiona0830", password="Cn921121@3", host=os.environ.get('AZURE_MYSQL_HOST'), port=3306, database="205cde", ssl_ca="DigiCertGlobalRootCA.crt.pem", ssl_disabled=False, local_infile = 1, cursorclass=pymysql.cursors.DictCursor)
    print("Connection established")
 except mysql.connector.Error as err:
   if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:

@@ -2,6 +2,7 @@
 {% block title %}Product{% endblock %}
 {% block content %}
 <h2 class="text-primary">Product</h2><br>
+<!-- Product Grid Container -->
 <div class="grid-container">
     {% for items in product %}
     <div class="grid-item">
@@ -12,6 +13,7 @@
     </div>
     {% endfor %}  
 </div>
+<!-- Pop Up Product Details Screen -->
     {% for items in product %}
     <input class="modal-state_cus" id="{{items.productName}}" type="checkbox" />
     <div class="modal_cus">

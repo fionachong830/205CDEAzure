@@ -4,6 +4,7 @@
 <h2 class="text-primary">Payment Details</h2><br>
 
 <div class="card">
+  <!-- Related History Table -->
   <div class="table-responsive">
     <table class="table align-items-center mb-0">
       <thead>
@@ -51,6 +52,7 @@
 </table> 
 </div>
 <p id="total" class="text-primary">Total: ${{amount}}</p>
+<!-- Submit Upload Document Form -->
 <div class="fill-in">
   {% for info in user %}
   <form action="/customer/{{info.userID}}/uploadDocument/submit" method="post" enctype="multipart/form-data">

@@ -2,6 +2,7 @@
 {% block title %}Help and Support{% endblock %}
 {% block content %}
 <h2 class="text-primary">Help and Support</h2><br>
+<!-- Help and Support Form -->
 <div class="fill-in">
     {% for info in user %}
     <form action="/customer/{{info.userID}}/helpSupport" method="post">

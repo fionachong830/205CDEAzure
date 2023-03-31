@@ -2,6 +2,7 @@
 {% block title %}Add Account{% endblock %}
 {% block content %}
 <h2 class="text-primary">Create New Account</h2><br>
+<!-- Add Account Form -->
 <div class="fill-in">
     {% for info in user%} 
     <form action="/staff/{{info.userID}}/addAccount" method="post">

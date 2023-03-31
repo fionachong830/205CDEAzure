@@ -5,6 +5,8 @@
 <p id="message"></p>
 {% if status != 'Empty' %}
 <div class="card">
+  <!-- Shopping Cart Page -->
+  <!-- Cart Table -->
   <div class="table-responsive">
     <table class="table align-items-center mb-0">
       <thead>
@@ -32,6 +34,7 @@
                 <p class="text-xs font-weight-bold mb-0">$ {{items.subtotal()}}</p>
             </td>
               <td class="align-middle">
+                <!-- Edit Button -->
                   <div class="buttons">
                     <label class="btn bg-gradient-primary mt-4" for="{{items.name}}">Edit</label>
                   </div>
@@ -53,6 +56,7 @@
 {% if status == 'Empty' %}
 Nothing in Cart
 {% endif %} 
+<!-- Pop Up Edit Screen -->
 {% for items in list %}
     <input class="modal-state_cus" id="{{items.name}}" type="checkbox" />
     <div class="modal_cus">
