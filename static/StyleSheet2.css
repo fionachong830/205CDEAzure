@@ -168,14 +168,13 @@
 }
 
 .fill-in label, input[type=text], input[type=tel], input[type=email], input[type=password], input[type=number], input[type=file],select {
-    all: initial;
-    all: unset;
-    all: inherit;
-    all: revert;
-    all: revert-layer;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
     display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     box-sizing: border-box;
-    margin-bottom: 0.6em;    
 }
 
 .fill-in label {
