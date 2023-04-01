@@ -168,30 +168,31 @@
 }
 
 .fill-in label, input[type=text], input[type=tel], input[type=email], input[type=password], input[type=number], input[type=file],select {
-    width: 100%;
-    padding: 12px 20px;
-    margin: 8px 0;
+    all: initial;
+    all: unset;
+    all: inherit;
+    all: revert;
+    all: revert-layer;
     display: inline-block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
     box-sizing: border-box;
+    margin-bottom: 0.6em;    
+    width: 100%;
+    padding: 0.5em;
+    font-size: 1em;
+    width: 40%;
 }
 
 .fill-in label {
     width: 30%;
     text-align: right;
     margin: 0 10% 0 0;
+    font-weight: bold;
 }
 
 .fill-in label:after {
     content: ': ';
 }
-.fill-in input[type=text] {
-    width: 40%;
-}
-.fill-in select {
-    width: 20%;
-}
+
 .fill-in fieldset {
     margin: 0 0 1em 0;
 }
