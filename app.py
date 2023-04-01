@@ -101,10 +101,12 @@ def getUserInfo(id):
 
 @app.route("/")
 def home():
+    print('Request for home page received')
     return render_template('home.html')
 
 @app.route("/login", methods=['POST', 'GET'])
 def login():
+    print('Request for login page received')
     if request.method == 'POST':
         userName = request.form['userName']
         password = request.form['password']
@@ -131,6 +133,7 @@ def login():
 
 @app.route("/signup", methods=['POST', 'GET'])
 def signup():
+    print('Request for signup page received')
     if request.method == 'POST':
         name = request.form['name']
         phoneNo = request.form['phoneNo'].strip()
@@ -165,10 +168,12 @@ def signup():
 
 @app.route("/forgotPassword")
 def forgotPassword():
+    print('Request for forgot password page received')
     return render_template('forgotPassword.html')
 
 @app.route("/forgotPassword/email", methods=['POST'])
 def password():
+    print('Request for forgot password email received')
     phoneNo = request.form['phoneNo'].strip()
     email = request.form['email'].strip()
     cursor.execute('SELECT * from userInfo')
@@ -185,11 +190,13 @@ def password():
         
 @app.route("/product")
 def productGuest():
+    print('Request for guest product page received')
     product = getProduct()
     return render_template('productGuest.html', product=product)
 
 @app.route("/<int:id>/logout", methods=['GET'])
 def logout(id):
+    print('Request for logout page received')
     global cart 
     sql = 'UPDATE userInfo set loginStatus=0 where userID={id};'
     cursor.execute(sql.format(id=id))
@@ -200,6 +207,7 @@ def logout(id):
 "Customer app route" 
 @app.route("/customer/<int:id>/dashboard", methods=['POST', 'GET'])
 def cusDashboard(id):
+    print('Request for customer dashboard page received')
     if checkLoginStatus(id) == True:
         sql = '''    
         select *, DATEDIFF(subscription.subEnd, CURDATE()) as remaining 
@@ -223,6 +231,7 @@ def cusDashboard(id):
 
 @app.route("/customer/<int:id>/dashboard/<int:prodid>", methods=['GET'])
 def cusDashboardDetails(id, prodid):
+    print('Request for customer dashboard details page received')
     if checkLoginStatus(id) == True:
         sql = '''    
         select * from subHistory, product, payment 
@@ -239,6 +248,7 @@ def cusDashboardDetails(id, prodid):
 
 @app.route("/customer/<int:id>/product", methods=['POST', 'GET'])
 def cusProduct(id):
+    print('Request for customer product page received')
     if checkLoginStatus(id) == True:    
         product = getProduct()
         user = getUserInfo(id)
@@ -255,6 +265,7 @@ def cusProduct(id):
 
 @app.route("/customer/<int:id>/buy", methods=['POST', 'GET'])
 def cusBuy(id):
+    print('Request for buy items received')
     if checkLoginStatus(id) == True:    
         if request.method == 'POST':
             cursor.execute('SELECT money from userInfo where userID={id}'.format(id=id))
@@ -361,6 +372,7 @@ def cusBuy(id):
 
 @app.route("/customer/<int:id>/subscriptionHistory", methods=['GET'])
 def cusSubscriptionHistory(id):
+    print('Request for customer subscription history page received')
     if checkLoginStatus(id) == True: 
         sql = '''    
         select * from subHistory, product, payment
@@ -374,6 +386,7 @@ def cusSubscriptionHistory(id):
 
 @app.route("/customer/<int:id>/uploadDocument", methods=['GET'])
 def cusUploadDocument(id): 
+    print('Request for customer upload document page received')
     if checkLoginStatus(id) == True:  
         sql = '''    
         select * from payment
@@ -388,6 +401,7 @@ def cusUploadDocument(id):
 
 @app.route("/customer/<int:id>/uploadDocument/submit", methods=['POST','GET'])
 def cusUploadDocumentSubmit(id):
+    print('Request for upload document received')
     if checkLoginStatus(id) == True:  
         user = getUserInfo(id)
         if request.method == 'POST':
@@ -427,6 +441,7 @@ def cusUploadDocumentSubmit(id):
     
 @app.route("/customer/<int:id>/uploadDocument/<int:pid>", methods=['GET'])
 def cusSubscriptionDetails(id, pid):
+    print('Request for upload document details page received')
     if checkLoginStatus(id) == True: 
         sql = 'SELECT payAmount FROM payment WHERE payID={pid}'
         cursor.execute(sql.format(pid=pid))
@@ -444,6 +459,7 @@ def cusSubscriptionDetails(id, pid):
     
 @app.route("/customer/<int:id>/shoppingCart", methods=['POST', 'GET'])
 def cusShoppingCart(id):
+    print('Request for add items to cart received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         if request.method == 'POST':
@@ -470,6 +486,7 @@ def cusShoppingCart(id):
 
 @app.route("/customer/<int:id>/personalInfo", methods=['POST','GET'])
 def cusPersonalInfo(id):
+    print('Request for personal info page received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         if request.method == 'POST':
@@ -499,6 +516,7 @@ def cusPersonalInfo(id):
 
 @app.route("/customer/<int:id>/changePassword", methods=['POST','GET'])
 def cusChangePassword(id):
+    print('Request for change password page received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         if request.method == 'POST':
@@ -518,6 +536,7 @@ def cusChangePassword(id):
     
 @app.route("/customer/<int:id>/helpSupport",  methods=['POST','GET'])
 def cusHelpSupport(id):
+    print('Request for help and support page received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         product = getProduct()
@@ -546,6 +565,7 @@ def cusHelpSupport(id):
 "Staff app route"
 @app.route("/staff/<int:id>/dashboard", methods=['GET'])
 def staffDashboard(id):
+    print('Request for staff dashboard page received')
     if checkLoginStatus(id) == True:
         sql = '''    
         select *, DATEDIFF(subscription.subEnd, CURDATE()) as remaining 
@@ -562,6 +582,7 @@ def staffDashboard(id):
 
 @app.route("/staff/<int:id>/dashboard/<int:cid>/<int:prodid>", methods=['GET'])
 def staffDashboardDetails(id, prodid, cid):
+    print('Request for staff dashboard details page received')
     if checkLoginStatus(id) == True:
         sql = '''    
         select * from subHistory, product, payment
@@ -580,6 +601,7 @@ def staffDashboardDetails(id, prodid, cid):
 
 @app.route("/staff/<int:id>/buy", methods=['GET', 'POST'])
 def staffExtend(id):
+    print('Request for staff extend received')
     if checkLoginStatus(id) == True:
         if request.method == 'POST':
             userID = request.form['userID']
@@ -610,6 +632,7 @@ def staffExtend(id):
 
 @app.route("/staff/<int:id>/updateProduct", methods=['GET'])
 def staffUpdateProduct(id):
+    print('Request for update product page received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         product = getProduct()
@@ -619,6 +642,7 @@ def staffUpdateProduct(id):
     
 @app.route("/staff/<int:id>/updateProduct/submit", methods=['POST', 'GET'])
 def staffUpdateProductSubmit(id):
+    print('Request for update product received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         if request.method == 'POST':
@@ -643,6 +667,7 @@ def staffUpdateProductSubmit(id):
 
 @app.route("/staff/<int:id>/updateProduct/submitpic", methods=['POST', 'GET'])
 def staffUpdateProductSubmitPic(id):
+    print('Request for update picture received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         if request.method == 'POST':
@@ -665,6 +690,7 @@ def staffUpdateProductSubmitPic(id):
 
 @app.route("/staff/<int:id>/updateProduct/delete", methods=['POST', 'GET'])
 def staffUpdateProductDelete(id):
+    print('Request for delete product received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         if request.method == 'POST':
@@ -696,6 +722,7 @@ def staffUpdateProductDelete(id):
 
 @app.route("/staff/<int:id>/addProduct", methods=['GET'])
 def staffAddProduct(id):
+    print('Request for add product page received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         return render_template('staffAddProduct.html', user=user)
@@ -704,6 +731,7 @@ def staffAddProduct(id):
 
 @app.route("/staff/<int:id>/addProduct/submit", methods=['POST', 'GET'])
 def staffAddProductSubmit(id):
+    print('Request for add product received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         if request.method == 'POST':
@@ -734,6 +762,7 @@ def staffAddProductSubmit(id):
 
 @app.route("/staff/<int:id>/history", methods=['GET'])
 def staffHistory(id):
+    print('Request for staff history received')
     if checkLoginStatus(id) == True: 
         sql = '''    
         select * from subHistory, product, payment
@@ -748,6 +777,7 @@ def staffHistory(id):
     
 @app.route("/staff/<int:id>/approverCorner", methods=['GET'])
 def staffApproverCorner(id):
+    print('Request for approver corner page received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         cursor.execute('select * from payment where payDoc is not null and payStatus != "Approved"')
@@ -758,6 +788,7 @@ def staffApproverCorner(id):
 
 @app.route("/staff/<int:id>/approverCorner/submit", methods=['POST', 'GET'])
 def staffApproverCornerSubmit(id):
+    print('Request for approve items received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         if request.method == 'POST':
@@ -808,6 +839,7 @@ def staffApproverCornerSubmit(id):
 
 @app.route("/staff/<int:id>/account", methods=['GET'])
 def staffAccount(id):
+    print('Request for account page received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)    
         cursor.execute('SELECT * FROM userInfo WHERE role="c"')
@@ -818,6 +850,7 @@ def staffAccount(id):
 
 @app.route("/staff/<int:id>/addAccount", methods=['POST', 'GET'])
 def staffAddAccount(id):
+    print('Request for add account page received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         if request.method == 'POST':
@@ -861,6 +894,7 @@ def staffAddAccount(id):
 
 @app.route("/staff/<int:id>/inquiry", methods=['POST', 'GET'])
 def staffInquiry(id):
+    print('Request for inquiry page received')
     if checkLoginStatus(id) == True: 
         if request.method == 'POST':
             inquiryID = request.form['inquiryID']
@@ -881,6 +915,7 @@ def staffInquiry(id):
     
 @app.route("/staff/<int:id>/personalInfo", methods=['POST','GET'])
 def staffPersonalInfo(id):
+    print('Request for personal info page received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         if request.method == 'POST':
@@ -910,6 +945,7 @@ def staffPersonalInfo(id):
     
 @app.route("/staff/<int:id>/changePassword", methods=['POST','GET'])
 def staffChangePassword(id):
+    print('Request for change password page received')
     if checkLoginStatus(id) == True:
         user = getUserInfo(id)
         if request.method == 'POST':
@@ -929,10 +965,12 @@ def staffChangePassword(id):
 
 @app.errorhandler(404)
 def page_not_found(e):
+    print('Request for 404 page received')
     return render_template('404.html'), 404
 
 @app.errorhandler(500)
 def internal_server_error(e):
+    print('Request for 505 page received')
     return render_template('500.html'), 500
 
 if __name__=='__main__':
