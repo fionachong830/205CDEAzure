@@ -57,6 +57,9 @@ Upload successfully
 {% if status == 'fail_status' %}
 The payment status is not ready for upload document
 {% endif %}
+{% if status == 'NameDup' %}
+The file name duplicated. 
+{% endif %}
 </div>
 {% endblock %}
 

@@ -426,7 +426,8 @@ def cusUploadDocumentSubmit(id):
                             status='success'                            
                         except Exception as e:
                             print(e)
-                            print("Ignoring duplicate filenames") # ignore duplicate filenames              
+                            print("Ignoring duplicate filenames") # ignore duplicate filenames
+                            status='NameDup'
                 else:
                     status='fail_status'
         sql = '''    
@@ -974,4 +975,4 @@ def internal_server_error(e):
     return render_template('500.html'), 500
 
 if __name__=='__main__':
-    app.run()
+    app.run(debug=True)
