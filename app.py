@@ -571,7 +571,7 @@ def staffDashboard(id):
         sql = '''    
         select *, DATEDIFF(subscription.subEnd, CURDATE()) as remaining 
         from product, subscription, userInfo
-        where product.prodID=subscription.prodID and userInfo.userID=subscription.userID and product.deletedInd='N'
+        where product.prodID=subscription.prodID and userInfo.userID=subscription.userID and product.deletedInd='N' and subscription.subEnd>=CURDATE()
         '''
         cursor.execute(sql)
         data = cursor.fetchall()
@@ -623,7 +623,7 @@ def staffExtend(id):
         sql = '''    
         select *, DATEDIFF(subscription.subEnd, CURDATE()) as remaining 
         from product, subscription, userInfo
-        where product.prodID=subscription.prodID and userInfo.userID=subscription.userID
+        where product.prodID=subscription.prodID and userInfo.userID=subscription.userID and product.deletedInd='N' and subscription.subEnd>=CURDATE()
         '''
         cursor.execute(sql)
         data = cursor.fetchall()
