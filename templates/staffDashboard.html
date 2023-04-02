@@ -54,7 +54,7 @@
         <label class="modal__bg_cus" for="{{items.productName}}.{{items.userID}}"></label>
         <div class="modal__inner_cus">
             <label class="modal__close_cus" for="{{items.productName}}.{{items.userID}}"></label>
-            <h2 class="text-primary">Route System for {{items.userName}} ({{items.userID}})</h2>
+            <h2 class="text-primary">{{items.productName}} for {{items.userName}} ({{items.userID}})</h2>
             <div class="fill-in">    
                 {% for info in user%}
                 <form action="/staff/{{info.userID}}/buy" method="post">

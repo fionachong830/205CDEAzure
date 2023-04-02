@@ -52,6 +52,7 @@
     </table>
     </div>
 
+<!--Pop up add to cart screen-->
 {% for items in product %}
     <input class="modal-state_cus" id="{{items.productName}}" type="checkbox" />
     <div class="modal_cus">
@@ -75,6 +76,7 @@
     </div>    
 {% endfor %}        
 
+<!--Pop up alive application-->
 {% for items in product %}
     <input class="modal-state_cus" id="{{items.productName}}_alive" type="checkbox" />
     <div class="modal_cus">
