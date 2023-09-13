@@ -4,7 +4,7 @@ import os
 from flask_mail import Mail, Message
 from ShoppingCart import ShoppingCart
 from distutils.log import debug
-import pymysql
+import pymysql 
 from fileinput import filename
 import mysql.connector
 from mysql.connector import errorcode
