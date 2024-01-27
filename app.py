@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_bootstrap import Bootstrap
-import os
+import os 
 from flask_mail import Mail, Message
 from ShoppingCart import ShoppingCart 
 from distutils.log import debug
